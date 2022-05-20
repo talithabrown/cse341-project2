@@ -13,4 +13,8 @@ routes.use('/events', event);
 routes.use('/api-docs', swaggerUi.serve);
 routes.get('/api-docs', swaggerUi.setup(swaggerDocument));
 
+routes.use('/', (req, res) => {
+  res.send('You are home!');
+});
+
 module.exports = routes;

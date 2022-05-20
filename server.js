@@ -30,6 +30,8 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
+//cse341-backend2-event-manager.herokuapp.com
+
 // {
 //   "event_id": 1,
 //   "title": "Fireworks",
