@@ -1,15 +1,10 @@
 module.exports = (mongoose) => {
   const User = mongoose.model(
     'users',
-    mongoose.Schema(
-      {
-        user_id: Number,
-        first_name: String,
-        last_name: String,
-        email: String
-      },
-      { timestamps: true }
-    )
+    mongoose.Schema({
+      username: String,
+      googleId: String
+    })
   );
 
   return User;
