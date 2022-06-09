@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Home</title>
+        <title>Events</title>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
             body {
@@ -38,6 +38,20 @@
             main {
                 padding: 0px 20px;
             }
+            .event {
+                padding: 10px;
+                margin: 10px;
+                background-color: white;
+            }
+            form {
+                background-color: #FFDDD2;
+                padding: 10px;
+                margin: 10px;
+                text-align: center;
+            }
+            #zip {
+                margin-left: 20px;
+            }
         </style>
     </head>
     <body>
@@ -53,7 +67,7 @@
             </ul>
         </nav>
         <header>
-            <h1>Home</h1>
+            <h1>Events</h1>
         </header>
         <main>
             <form action="/events/zip/" method="get">
@@ -61,6 +75,17 @@
                 <input type="submit" value="Seach!">
                 <input type="hidden" value=zip>
             </form>
+            <div>
+                <% if (event) { 
+                    for (let i = 0; i < event.length; i++) { %>
+                <div class="event">
+                <h2 class="event-title"><%= event[i].title %></h2>
+                <p><%= event[i].date %> at <%= event[i].time %></p>
+                <p><%= event[i].address %> in <%= event[i].city %></p>
+                <p><%= event[i].description %></p>
+                </div>
+                <% }} %>
+            </div>
         </main>
     </body>
 </html>

@@ -8,7 +8,7 @@ routes.get('/', events.findAll);
 routes.post('/', validation.addNew, events.create);
 
 // Retrieve all events in a certain zip code
-routes.get('/zip/:zip_code', events.findByZip);
+routes.get('/zip', events.findByZip);
 
 // Retrieve a single event with id
 routes.get('/:event_id', events.findOne);

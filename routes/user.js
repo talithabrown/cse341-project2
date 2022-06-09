@@ -1,5 +1,5 @@
-// const routes = require('express').Router();
-// const users = require('../controllers/user.js');
+const routes = require('express').Router();
+//const users = require('../controllers/user.js');
 
 // routes.get('/', users.findAll);
 
@@ -17,5 +17,9 @@
 
 // // Delete a user with id
 // routes.delete('/:id', users.delete);
+
+routes.get('/', (req, res) => {
+  res.send('you are loggedin, this is your profile - ' + req.user.username);
+});
 
 // module.exports = routes;

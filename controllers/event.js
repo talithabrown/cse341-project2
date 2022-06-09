@@ -9,7 +9,7 @@ exports.create = (req, res) => {
     date: req.body.date,
     time: req.body.time,
     city: req.body.city,
-    zip_code: req.body.zip_code,
+    zip_code: req.body.zip,
     address: req.body.address,
     description: req.body.description
   });
@@ -18,7 +18,9 @@ exports.create = (req, res) => {
   event
     .save(event)
     .then((data) => {
-      res.send(data);
+      console.log(data);
+      req.session.message = 'Your Event was successfully posted!';
+      res.redirect('/profile');
     })
     .catch((err) => {
       res.status(500).send({
@@ -77,17 +79,20 @@ exports.findOne = (req, res) => {
 
 //Find by zip code
 exports.findByZip = (req, res) => {
-  if (req.params.zip_code.length != 5) {
+  if (req.query.zip.length != 5) {
     res.status(400).json({
       message: 'A valid zip code is needed to retrive events'
     });
   } else {
-    const zip_code = req.params.zip_code;
+    const zip_code = req.query.zip;
     Event.find({ zip_code: zip_code })
       .then((data) => {
         if (!data) {
           res.status(404).send({ message: `Not found. Events with zip code ${zip_code}` });
-        } else res.send(data);
+        } else {
+          //res.send(data);
+          res.render('events', { event: data, user: req.session.user });
+        }
       })
       .catch((err) => {
         res.status(500).send({

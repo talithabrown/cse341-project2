@@ -6,7 +6,7 @@ const addNew = (req, res, next) => {
     date: 'required|string',
     time: 'required|string',
     city: 'required|string',
-    zip_code: 'required|string',
+    zip: 'required|string',
     address: 'required|string',
     description: 'string'
   };
@@ -29,7 +29,7 @@ const updateOne = (req, res, next) => {
     date: 'string',
     time: 'string',
     city: 'string',
-    zip_code: 'string',
+    zip: 'string',
     address: 'string',
     description: 'string'
   };

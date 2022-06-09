@@ -27,7 +27,7 @@ passport.use(
         if (currentUser) {
           // alerady have user
           console.log(`user is: ${currentUser}`);
-          done(null, currentUser);
+          return done(null, currentUser);
         } else {
           new User({
             username: profile.displayName,

@@ -3,20 +3,19 @@ const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 3000;
 require('./config/passport-setup');
-const keys = require('./config/keys');
-const cookieSession = require('cookie-session');
+//const keys = require('./config/keys');
 const passport = require('passport');
+const session = require('express-session');
+
+//require('./config/passport')(passport);
 
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-  res.render('home');
-});
-
 app.use(
-  cookieSession({
-    maxAge: 24 * 60 * 60 * 1000,
-    keys: [keys.session.cookieKey]
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
   })
 );
 
@@ -24,13 +23,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app
-  .use(cors())
-  .use(express.json())
-  .use(express.urlencoded({ extended: true }))
-  .use('/', require('./routes'));
-
 const db = require('./models');
+//const { session } = require('passport/lib');
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
@@ -43,6 +37,12 @@ db.mongoose
     console.log('Cannot connect to the database!', err);
     process.exit();
   });
+
+app
+  .use(cors())
+  .use(express.json())
+  .use(express.urlencoded({ extended: true }))
+  .use('/', require('./routes'));
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
