@@ -11,16 +11,16 @@
     "https"
   ],
   "paths": {
-    "/api-docs": {
+    "/": {
       "get": {
-        "description": "",
+        "description": "Returns the home page",
         "parameters": [],
         "responses": {}
       }
     },
     "/events/": {
       "get": {
-        "description": "",
+        "description": "Returns all events",
         "parameters": [],
         "responses": {
           "200": {
@@ -32,7 +32,7 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Creates a new event. Then redirects user to profile page if they are logged in or login page if they are not logged in.",
         "parameters": [
           {
             "name": "body",
@@ -52,7 +52,7 @@
                 "city": {
                   "example": "any"
                 },
-                "zip_code": {
+                "zip": {
                   "example": "any"
                 },
                 "address": {
@@ -66,9 +66,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "412": {
             "description": "Precondition Failed"
           },
@@ -78,21 +75,17 @@
         }
       }
     },
-    "/events/zip/{zip_code}": {
+    "/events/zip": {
       "get": {
-        "description": "",
+        "description": "Gets all events with a specified zip code",
         "parameters": [
           {
-            "name": "zip_code",
-            "in": "path",
-            "required": true,
+            "name": "zip",
+            "in": "query",
             "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "400": {
             "description": "Bad Request"
           },
@@ -107,7 +100,7 @@
     },
     "/events/{event_id}": {
       "get": {
-        "description": "",
+        "description": "Gets one event with specified ID",
         "parameters": [
           {
             "name": "event_id",
@@ -134,43 +127,13 @@
     },
     "/events/{id}": {
       "put": {
-        "description": "",
+        "description": "Updates one event with specified ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "example": "any"
-                },
-                "date": {
-                  "example": "any"
-                },
-                "time": {
-                  "example": "any"
-                },
-                "city": {
-                  "example": "any"
-                },
-                "zip_code": {
-                  "example": "any"
-                },
-                "address": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -192,7 +155,7 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Deletes one event with specified ID",
         "parameters": [
           {
             "name": "id",
@@ -215,6 +178,27 @@
             "description": "Internal Server Error"
           }
         }
+      }
+    },
+    "/profile/": {
+      "get": {
+        "description": "Returns profile page if user is logged in, otherwise user will be redirected to login page",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/auth/login": {
+      "get": {
+        "description": "Returns the login page",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "description": "Logs user out and returns the home page",
+        "parameters": [],
+        "responses": {}
       }
     }
   }

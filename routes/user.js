@@ -6,9 +6,6 @@ const routes = require('express').Router();
 // // Create a new user
 // routes.post('/', users.create);
 
-// // Retrieve all users in a certain zip code
-// routes.get('/', users.findByZip)
-
 // // Retrieve a single user with id
 // routes.get('/:user_id', users.findOne);
 
