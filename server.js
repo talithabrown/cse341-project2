@@ -3,7 +3,6 @@ const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 3000;
 require('./config/passport-setup');
-//const keys = require('./config/keys');
 const passport = require('passport');
 const session = require('express-session');
 
